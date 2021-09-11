@@ -1,0 +1,98 @@
+kubeadm init --apiserver-advertise-address=193.16.16.12 --pod-network-cidr=10.0.0.0/16 --service-cidr 10.0.0.0/16 --kubernetes-version=v1.18.14 --ignore-preflight-errors all
+
+
+
+
+curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/devel:kubic:libcontainers:stable.repo
+curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
+yum install cri-o -y
+
+https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
+
+https://kubernetes.io/docs/concepts/workloads/pods/
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
+https://kubernetes.io/docs/reference/kubectl/docker-cli-to-kubectl/
+
+https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
+
+
+
+Deployment Example:
+
+kubectl create deployment --image=nginx nginx-app
+kubectl expose deployment nginx-app --port=80 --name=nginx-http
+
+
+Below Working Commands:
+
+kubectl create deployment --image=nginx static-web --port=80
+kubectl expose deployment static-web --port=8081 --target-port=80 --name=nginx-service --type=LoadBalancer
+
+
+kubectl create deployment --image=nginx mailhog-web --port=8025
+kubectl expose deployment mailhog-web --port=8025 --target-port=8025 --name=mailhog-service --type=LoadBalancer
+
+Command to scale
+
+kubectl scale --replicas=3 deployment.apps/static-web
+kubectl scale --replicas=0 deployment.apps/static-web
+
+kubectl scale --replicas=3 deployment.apps/mailhog-web
+
+
+Pod Example:
+
+
+kubectl create pod --image=nginx static-web
+
+kubectl expose pod static-web --port=8081 --target-port=80 --name=nginx-service --type=LoadBalancer
+
+Here target-port is container port
+port is expose port
+
+
+ kubectl scale --replicas=3 pod/static-web
+
+Step 1: Install MetalLB in your cluster
+
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+# On first install only
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+
+Step 2: Configure it by using a configmap
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 172.42.42.100-172.42.42.105 #Update this with your Nodes IP range
+
+
+
+Vagrant IP address:
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 193.16.16.12
