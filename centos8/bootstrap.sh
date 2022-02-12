@@ -82,3 +82,4 @@ dnf install -y sysstat
 echo "[TASK 26] Ensure to install netcat"
 dnf install -y netcat
 #ansible-pull -U https://github.com/hemanth22/ansible-pull-vsftpd.git
+#ansible-pull -U https://github.com/hemanth22/ansible-pull-vsftpd.git -i "$(hostname --short)"
