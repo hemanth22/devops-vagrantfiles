@@ -35,3 +35,30 @@ yum install opensearch-dashboards -y
 echo "[TASK 9] install opensearch opensearch-dashboards apps"
 systemctl status -l opensearch.service
 systemctl status -l opensearch-dashboards.service
+
+echo "[TASK 10] Ensure to install net-tools"
+dnf install net-tools -y
+
+echo "[TASK 11] Ensure to install bind-utils"
+dnf install bind-utils -y
+
+echo "[TASK 12] Ensure to install tree"
+dnf -y install tree
+
+echo "[TASK 13] Ensure to install strace"
+dnf install -y strace
+
+echo "[TASK 14] Ensure to install traceroute"
+dnf install -y traceroute
+
+echo "[TASK 15] Ensure to install sysstat"
+dnf install -y sysstat
+
+echo "[TASK 16] Ensure to install netcat"
+dnf install -y netcat
+
+echo "[TASK 17] Ensure to install python 3.9"
+dnf install -y python39
+
+echo "[TASK 18] Ensure to install ansible"
+pip3 install ansible
