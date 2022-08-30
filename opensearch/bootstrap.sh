@@ -62,3 +62,8 @@ dnf install -y python39
 
 echo "[TASK 18] Ensure to install ansible"
 pip3 install ansible
+
+echo "[TASK 19] README"
+echo "execute below commands to start opensearch and opensearch-dashboards"
+echo "systemctl start opensearch.service"
+echo "systemctl start opensearch-dashboards.service"
