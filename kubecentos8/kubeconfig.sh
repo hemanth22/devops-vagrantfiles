@@ -6,12 +6,14 @@ echo "[TASK 4] Installation of git bash-completion"
 ## Install yum-utils, bash completion, git, and more
 yum install yum-utils nfs-utils bash-completion git -y
 yum install epel-release yum-utils device-mapper-persistent-data lvm2 wget -y
+yum install perl perl-Digest-SHA -y
 
 echo "[TASK 5] Disable firewalld"
 ##Disable firewall starting from Kubernetes v1.19 onwards
 systemctl stop firewalld
 systemctl disable firewalld --now
 systemctl mask --now firewalld
+systemctl status -l firewalld
 
 echo "[TASK 6] Letting ipTables see bridged networks"
 ## letting ipTables see bridged networks
@@ -97,18 +99,28 @@ export OS=CentOS_8_Stream
 
 echo "[TASK 18] Set CRI-O"
 #set CRI-O
-export VERSION=1.23:1.23.2
+#export VERSION=1.23:1.23.2
 #export OS=CentOS_8_Stream
+#export OS=CentOS_8_Stream
+#export VERSION=1.25:1.25.0
+#export OS=CentOS_8_Stream
+export VERSION=1.24:1.24.0
+#curl https://raw.githubusercontent.com/cri-o/cri-o/main/scripts/get | bash -s -- -t v1.24.0
+
 
 echo "[TASK 19] Install CRI-O"
 #Install CRI-O
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/devel:kubic:libcontainers:stable.repo
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
+curl https://raw.githubusercontent.com/cri-o/cri-o/main/scripts/get | bash -s -- -t v1.24.0
 yum install cri-o -y --disablerepo=kubernetes
+yum install -y containernetworking-plugins
 
 echo "[TASK 20] Install Kubernetes, specify Version as CRI-O"
 ##Install Kubernetes, specify Version as CRI-O
-yum install -y kubelet-1.23.2-0 kubeadm-1.23.2-0 kubectl-1.23.2-0 --disableexcludes=kubernetes
+#yum install -y kubelet-1.23.2-0 kubeadm-1.23.2-0 kubectl-1.23.2-0 --disableexcludes=kubernetes
+yum install -y kubelet-1.24.0-0 kubeadm-1.24.0-0 kubectl-1.24.0-0 --disableexcludes=kubernetes
+
 
 echo "[TASK 21] Check kubernetes and CRI-O is installed"
 rpm -qa | grep kube
@@ -124,8 +136,8 @@ echo "[TASK 24] Ensure to enable CRI-O and kubelet"
 systemctl enable crio --now
 systemctl enable kubelet --now
 
-echo "[TASK 25] Ensure to start kubernetes cluster with vv1.23.2"
-kubeadm init  --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.23.2 --ignore-preflight-errors all
+echo "[TASK 25] Ensure to start kubernetes cluster with v1.24.0"
+kubeadm init  --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.24.0 --ignore-preflight-errors all
 
 echo "[TASK 26] Make kube configuration"
 mkdir -p $HOME/.kube
@@ -156,6 +168,7 @@ kubectl get nodes
 
 echo "[TASK 35] Taint master control plane"
 kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 echo "[TASK 36] Install kubectl convert plugin"
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert"
@@ -178,3 +191,9 @@ kubectl create namespace metallb-system
 echo "[TASK 42] install bare-metal-lb-config"
 cp -v /vagrant/metal-lb-config.yaml metal-lb-config.yaml
 kubectl create -f metal-lb-config.yaml
+
+echo "[TASK 43] configure kubeadm"
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+sudo chmod 755 /etc/kubernetes/admin.conf
