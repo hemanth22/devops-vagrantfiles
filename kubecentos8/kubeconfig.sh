@@ -6,7 +6,9 @@ echo "[TASK 4] Installation of git bash-completion"
 ## Install yum-utils, bash completion, git, and more
 yum install yum-utils nfs-utils bash-completion git -y
 yum install epel-release yum-utils device-mapper-persistent-data lvm2 wget -y
+yum install curl jq tar -y
 yum install perl perl-Digest-SHA -y
+
 
 echo "[TASK 5] Disable firewalld"
 ##Disable firewall starting from Kubernetes v1.19 onwards
@@ -113,6 +115,7 @@ echo "[TASK 19] Install CRI-O"
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/devel:kubic:libcontainers:stable.repo
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
 curl https://raw.githubusercontent.com/cri-o/cri-o/main/scripts/get | bash -s -- -t v1.24.0
+yum clean packages
 yum install cri-o -y --disablerepo=kubernetes
 yum install -y containernetworking-plugins
 
