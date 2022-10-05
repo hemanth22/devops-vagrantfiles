@@ -169,6 +169,8 @@ sed -i -e 's/#   value: "192.168.0.0\/16"/  value: "192.168.0.0\/16"/' calico.ya
 
 echo "[TASK 32] Apply calico network"
 kubectl apply -f calico.yaml
+systemctl restart crio
+systemctl status -l crio
 
 echo "[TASK 33] Show pods in all namespaces"
 kubectl get pod --all-namespaces -o wide
