@@ -163,6 +163,9 @@ echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bashrc
 
 echo "[TASK 31] Pull calico network"
 curl https://docs.projectcalico.org/manifests/calico.yaml -O
+cp calico.yaml calico.yaml.backup
+sed -i -e 's/# - name: CALICO_IPV4POOL_CIDR/- name: CALICO_IPV4POOL_CIDR/' calico.yaml
+sed -i -e 's/#   value: "192.168.0.0\/16"/  value: "192.168.0.0\/16"/' calico.yaml
 
 echo "[TASK 32] Apply calico network"
 kubectl apply -f calico.yaml
