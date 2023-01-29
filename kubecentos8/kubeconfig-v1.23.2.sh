@@ -204,8 +204,8 @@ echo "[TASK 42] install bare-metal-lb-config"
 #cp -v /vagrant/metal-lb-config.yaml metal-lb-config.yaml
 #kubectl create -f metal-lb-config.yaml
 #kubectl apply -f 
-wget https://raw.githubusercontent.com/metallb/metallb/v0.13.5/config/manifests/metallb-native.yaml
-kubectl apply -f metallb-native.yaml
+#wget https://raw.githubusercontent.com/metallb/metallb/v0.13.5/config/manifests/metallb-native.yaml
+#kubectl apply -f metallb-native.yaml
 
 echo "[TASK 43] configure kubeadm"
 #mkdir -p $HOME/.kube
