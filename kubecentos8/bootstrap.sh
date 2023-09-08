@@ -9,3 +9,8 @@ systemctl reload sshd
 # Set Root password
 echo "[TASK 2] Set root password"
 echo -e "hemanth\nhemanth" | passwd root >/dev/null 2>&1
+
+echo "[TASK 3] DNF installation"
+dnf update rpm
+dnf update
+
