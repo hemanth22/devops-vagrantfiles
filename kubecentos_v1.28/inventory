@@ -1,0 +1,1 @@
+kubecentos ansible_ssh_host=193.16.16.11 ansible_ssh_port=22

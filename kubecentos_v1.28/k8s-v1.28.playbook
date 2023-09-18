@@ -1,0 +1,82 @@
+---
+- name: kubernetes v1.28
+  hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install the latest version of yum utils
+      ansible.builtin.yum:
+        name: yum-utils
+        state: latest
+
+    - name: Install the latest version of nfs utils
+      ansible.builtin.yum:
+        name: nfs-utils
+        state: latest
+
+    - name: Install the latest version of bash-completion
+      ansible.builtin.yum:
+        name: bash-completion
+        state: latest
+
+    - name: Install the latest version of git
+      ansible.builtin.yum:
+        name: git
+        state: latest
+
+    - name: Install the latest version of epel-release
+      ansible.builtin.yum:
+        name: epel-release
+        state: latest
+
+    - name: Install the latest version of device-mapper-persistent-data
+      ansible.builtin.yum:
+        name: device-mapper-persistent-data
+        state: latest
+
+    - name: Install the latest version of lvm2
+      ansible.builtin.yum:
+        name: lvm2
+        state: latest
+
+    - name: Install the latest version of wget
+      ansible.builtin.yum:
+        name: wget
+        state: latest
+
+    - name: Install the latest version of curl 
+      ansible.builtin.yum:
+        name: curl
+        state: latest
+
+    - name: Install the latest version of jq
+      ansible.builtin.yum:
+        name: jq
+        state: latest
+
+    - name: Install the latest version of tar
+      ansible.builtin.yum:
+        name: tar
+        state: latest
+
+    - name: Install the latest version of perl
+      ansible.builtin.yum:
+        name: perl
+        state: latest
+
+    - name: Install the latest version of perl-Digest-SHA
+      ansible.builtin.yum:
+        name: perl-Digest-SHA
+        state: latest
+
+    - name: Stopped firewalld service
+      ansible.builtin.systemd:
+        name: firewalld
+        state: stopped
+
+    - name: Stopped firewalld service
+      ansible.builtin.systemd:
+        name: firewalld
+        enabled: false
+        masked: true

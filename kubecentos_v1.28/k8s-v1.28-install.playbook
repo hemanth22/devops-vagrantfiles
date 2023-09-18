@@ -1,0 +1,241 @@
+---
+- name: kubernetes v1.28
+  hosts: localhost
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Configure k8s under modules file
+      file:
+       path: /etc/modules-load.d/crio.conf
+       state: touch
+
+    - name: Configure k8s under sysctl file
+      file:
+       path: /etc/sysctl.d/k8s.conf
+       state: touch
+
+    - name: Configure k8s cri under sysctl file
+      file:
+       path: /etc/sysctl.d/99-kubernetes-cri.conf
+       state: touch
+
+    - name: Configure k8s repo file under yum repositories
+      file:
+       path: /etc/yum.repos.d/kubernetes.repo
+       state: touch
+
+    - name: Configure k8s.conf under modules
+      file:
+       path: /etc/modules-load.d/k8s.conf
+       state: touch
+
+    - name: Configure br_netfilter
+      ansible.builtin.blockinfile:
+        path: "/etc/modules-load.d/k8s.conf"
+        block: |
+          br_netfilter
+
+    - name: Configure bridge call
+      ansible.builtin.blockinfile:
+        path: "/etc/sysctl.d/k8s.conf"
+        block: |
+          net.bridge.bridge-nf-call-ip6tables = 1
+          net.bridge.bridge-nf-call-iptables = 1
+
+    - name: Configure k8s files with system control
+      ansible.builtin.shell: sysctl --system
+
+    - name: Configure crio file
+      ansible.builtin.blockinfile:
+        path: "/etc/modules-load.d/crio.conf"
+        block: |
+          overlay
+          br_netfilter
+
+    - name: Configure kernel module for overlay
+      ansible.builtin.shell: modprobe overlay
+
+    - name: Configure kernel module for br_netfilter
+      ansible.builtin.shell: modprobe br_netfilter
+
+    - name: Configure kubernetes CRI
+      ansible.builtin.blockinfile:
+        path: "/etc/sysctl.d/99-kubernetes-cri.conf"
+        block: |
+          net.bridge.bridge-nf-call-iptables  = 1
+          net.ipv4.ip_forward                 = 1
+          net.bridge.bridge-nf-call-ip6tables = 1
+
+    - name: Configure YUM Repo for kubernetes
+      ansible.builtin.blockinfile:
+        path: "/etc/yum.repos.d/kubernetes.repo"
+        block: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+
+    - name: Disable linux kernel
+      ansible.builtin.shell: setenforce 0
+
+    - name: Interpreting linux kernel to permissive
+      ansible.builtin.shell: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+    - name: Disable al swaps from /proc/swaps
+      ansible.builtin.shell: swapoff -a
+
+    - name: Backup file system
+      ansible.builtin.shell: cp -vf /etc/fstab /etc/fstab.bak
+
+    - name: Interpreting file system configuration
+      ansible.builtin.shell: sed -i '/swap/d' /etc/fstab
+
+    - name: YUM output repolist
+      ansible.builtin.shell: yum repolist -y
+
+    - name: Install CRI-O as container runtime
+      ansible.builtin.shell: |
+        export OS=CentOS_8_Stream
+        yum list --showduplicates kubeadm --disableexcludes=kubernetes
+        export VERSION=1.28:1.28.0
+        curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo
+        https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/devel:kubic:libcontainers:stable.repo
+        curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
+        yum clean packages
+
+    - name: Install cri-o 
+      ansible.builtin.yum:
+        name:
+          - cri-o
+        state: present
+        disablerepo: "kubernetes"
+
+    - name: Install kubelet-1.28.1 kubeadm-1.28.1 kubectl-1.28.1
+      yum:
+        name:
+          - "kubeadm-1.28.1"
+          - "kubelet-1.28.1"
+          - "kubectl-1.28.1"
+        state: present
+        disable_excludes: all
+        exclude: "kubernetes"
+
+    - name: Verify available versions
+      ansible.builtin.shell: yum list --showduplicates kubeadm --disableexcludes=kubernetes
+
+    - name: Ensure container-common customized version installed
+      ansible.builtin.shell: |
+        echo "[SUB TASK 1.1] Download customized container-common version"
+        wget https://rpmfind.net/linux/centos/7.9.2009/extras/x86_64/Packages/containers-common-0.1.40-11.el7_8.x86_64.rpm
+        echo "[SUB TASK 1.2] Provisioning customized container-common"
+        yum install -y containers-common-0.1.40-11.el7_8.x86_64.rpm
+
+    - name: Ensure kubernetes and CRI-O installation is verified
+      ansible.builtin.shell: |
+        rpm -qa | grep kube
+        rpm -qa | grep cri-o
+
+    - name: Configuration of kubeadm
+      ansible.builtin.shell: |
+        echo "[SUB TASK 1.1] kubeadm backup"
+        cp -v /vagrant/10-kubeadm.conf /vagrant/10-kubeadm.conf.backup
+        echo "[SUB TASK 1.2] kubeadm backup on systemd"
+        cp -v /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf.backup
+        echo "[SUB TASK 1.3] Remove kubeadm config on systemd"
+        rm -vf /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
+        echo "[SUB TASK 1.4] Transform kubeadm config"
+        sed -i -e 's/\r$//' /vagrant/10-kubeadm.conf
+        echo "" >> /vagrant/10-kubeadm.conf
+        echo "[SUB TASK 1.5] kubeadm config update on systemd"
+        cp -vf /vagrant/10-kubeadm.conf /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+    - name: Just force systemd to reread configs
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    - name: Enable service crio and ensure it is not masked
+      ansible.builtin.systemd:
+        name: crio
+        state: stopped
+        enabled: true
+        masked: false
+
+    - name: Enable service crio and ensure it is not masked
+      ansible.builtin.systemd:
+        name: crio
+        state: started
+        enabled: true
+        masked: false
+
+    - name: Start kubernetes cluster
+      ansible.builtin.shell: kubeadm init  --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.28.1 --ignore-preflight-errors all
+
+    - name: Create a directory for ~/.kube if it does not exist
+      ansible.builtin.file:
+        path: $HOME/.kube
+        state: directory
+        mode: '0755'
+
+    - name: Copy kubernetes admin conf file to home directory
+      ansible.builtin.copy:
+        src: /etc/kubernetes/admin.conf
+        dest: $HOME/.kube/config
+
+    - name: Change file ownership, group to root
+      ansible.builtin.file:
+        path: $HOME/.kube/config
+        owner: root
+        group: root
+
+    - name: Ensure to export kubeconfig
+      ansible.builtin.shell: |
+        echo "[SUB TASK 1.1] update bash configuration"
+        echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bashrc
+        echo "[SUB TASK 1.2] update bash profile"
+        source ~/.bash_profile
+
+    - name: Download file from a file path
+      ansible.builtin.get_url:
+        url: https://docs.projectcalico.org/manifests/calico.yaml
+        dest: $HOME/calico.yaml
+
+    - name: Ensure backup is taken for calico yaml file
+      ansible.builtin.copy:
+        src: $HOME/calico.yaml
+        dest: $HOME/calico.yaml.backup
+        remote_src: yes
+
+    - name: Configuration of IPv4 Pool in calico yaml file
+      ansible.builtin.shell: |
+        echo "[SUB TASK 1.1] update calico ipv4pool"
+        sed -i -e 's/# - name: CALICO_IPV4POOL_CIDR/- name: CALICO_IPV4POOL_CIDR/' calico.yaml
+        echo "[SUB TASK 1.2] update gateway ip address"
+        sed -i -e 's/#   value: "192.168.0.0\/16"/  value: "192.168.0.0\/16"/' calico.yaml
+
+    - name: kube control to execute calico file
+      ansible.builtin.shell: kubectl apply -f calico.yaml
+
+    - name: Stop the crio
+      ansible.builtin.systemd:
+        name: crio
+        state: stopped
+
+    - name: Start the crio
+      ansible.builtin.systemd:
+        name: crio
+        state: started
+
+    - name: systemctl show status of crio
+      ansible.builtin.shell: systemctl status crio
+
+    - name: kube control to get pods
+      ansible.builtin.shell: kubectl get pod --all-namespaces -o wide
+
+    - name: kube control to get nodes
+      ansible.builtin.shell: kubectl get nodes --all-namespaces -o wide
+
+    - name: kube control to untaint control plane
+      ansible.builtin.shell: kubectl taint nodes --all node-role.kubernetes.io/control-plane-

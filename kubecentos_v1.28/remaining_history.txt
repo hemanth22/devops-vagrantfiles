@@ -1,0 +1,159 @@
+    1  systemctl status vsftpd
+    2  clear
+    3  code /vagrant/history.txt
+    4  code kubeconfig.sh
+    5  chmod 777 kubeconfig.sh
+    6  ./kubeconfig.sh
+    7  kubectl get pod --all-namespaces -o wide
+    8  clear
+    9  kubectl get pod --all-namespaces -o wide
+   10  clear
+   11  kubectl get pod --all-namespaces -o wide
+   12  kubectl apply -f https://raw.githubusercontent.com/skooner-k8s/skooner/master/kubernetes-skooner.yaml
+   13  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert"
+   14  curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert.sha256"
+   15  echo "$(cat kubectl-convert.sha256) kubectl-convert" | sha256sum --check
+   16  sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert
+   17  kubectl convert --help
+   18  clear
+   19  ls
+   20  kubectl convert --help
+   21  clear
+   22  ls -ltr
+   23  wget -O kubernetes-skooner.yaml https://raw.githubusercontent.com/skooner-k8s/skooner/master/kubernetes-skooner.yaml
+   24  kubectl convert -f kubernetes-skooner.yaml
+   25  clear
+   26  ls
+   27  clear
+   28  ls -ltr
+   29  code ingress-skooner.yaml
+   30  kubectl apply -f kubernetes-skooner.yaml
+   31  kubectl get all
+   32  code kubernetes-skooner.yaml
+   33  clear
+   34  kubectl get pod --all-namespaces -o wide
+   35  clear
+   36  ls
+   37  kubectl apply -f ingress-skooner.yaml
+   38  convertquota --help
+   39  clear
+   40  ls
+   41  kubectl convert -f ingress-skooner.yaml 
+   42  clear
+   43  kubectl convert -f ingress-skooner.yaml 
+   44  kubectl apply -f ingress-skooner.yaml
+   45  kubectl apply -f ingress-skooner.yaml --validate=false
+   46  # Create the service account in the current namespace (we assume default)
+   47  kubectl create serviceaccount skooner-sa
+   48  # Give that service account root on the cluster
+   49  kubectl create clusterrolebinding skooner-sa --clusterrole=cluster-admin --serviceaccount=default:skooner-sa
+   50  # Find the secret that was created to hold the token for the SA
+   51  kubectl get secrets
+   52  # Show the contents of the secret to extract the token
+   53  kubectl describe secret skooner-sa-token-xxxxx
+   54  kubectl describe secret skooner-sa-token-lr7h8
+   55  kubectl get svc --namespace=kube-system
+   56  kubectl get endpoints
+   57  kubectl get endpoints --namespace=kube-system
+   58  kubectl create namespace metallb-system
+   59  kubectl apply -f /vagrant/metal-lb-config.yaml
+   60  clear
+   61  kubectl describe secret skooner-sa-*
+   62  ls
+   63  clear
+   64  code nginx.yaml
+   65  kubectl get svc --all-namespaces
+   66  code service-nginx.yaml
+   67  kubectl apply -f nginx.yaml
+   68  kubectl apply -f service-nginx.yaml
+   69  clear
+   70  kubectl get svc --all-namespaces
+   71  kubectl get endpoints
+   72  kubectl describe endpoints/nginx-loadbalancer
+   73  kubectl get endpoints
+   74  kubectl get endpoints/nginx-loadbalancer
+   75  kubectl describe endpoints/nginx-loadbalancer
+   76  clear
+   77  kubectl apply -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer.yaml
+   78  kubectl get endpoints
+   79  kubectl get endpoints --all-namespace
+   80  kubectl get endpoints --all-namespaces
+   81  kubectl get endpoints/portainer -n portainer
+   82  kubectl describe endpoints/portainer -n portainer
+   83  kubectl get endpoints/portainer -n portainer
+   84  kubectl get endpoints --all-namespaces
+   85  wget https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer.yaml
+   86  ls
+   87  clear
+   88  cat portainer.yaml 
+   89  kubectl get nodes --all-namespaces
+   90  kubectl get all --all-namespaces
+   91  kubectl get svc --all-namespaces
+   92  kubectl delete -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer.yaml
+   93  clear
+   94  ls -ltr
+   95  kubectl delete -f service-nginx.yaml
+   96  clear
+   97  kubectl apply -f service-nginx.yaml
+   98  kubectl get svc
+   99  clear
+  100  kubectl get endpoints
+  101  kubectl get services
+  102  kubectl describe services/nginx-loadbalancer
+  103  clear
+  104  kubectl create user user1
+  105  kubectl create user user1 -k
+  106  kubectl list users
+  107  kubectl wait
+  108  kubectl get
+  109  clear
+  110  kubectl get all --all-namespaces
+  111  history
+  112  kubectl get all --all-namespaces
+  113  history
+  114  ls
+  115  history | grep calico
+  116  kubectl delete -f calico.yaml 
+  117  kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+  118  kubectl delete -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+  119  wget -O tigera-operator.yaml
+  120  wget -O tigera-operator.yaml https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+  121  ls 
+  122  kubectl create -f tigera-operator.yaml 
+  123  kubectl get all
+  124  kubectl get namespaces
+  125  kubectl get all -n kube-system
+  126  kubectl get endpoints
+  127  kubectl get endpoints -n kube-system
+  128  kubectl get endpoint skooner -n kube-system
+  129  kubectl get endpoints skooner -n kube-system
+  130  kubectl get tokens -n kube-system
+  131  kubectl get token -n kube-system
+  132  kubectl get secret -n kube-system
+  133  kubectl get secret
+  134  kubectl describe secret/skooner-sa-token-lr7h8
+  135  kubectl get pods
+  136  kubectl describe pod my-nginx-67c9c89584-qcgsh
+  137  clear
+  138  kubectl get pods --all-namespaces | grep Terminating
+  139  kubectl get pods  | grep Terminating
+  140  kubectl delete pod my-nginx-67c9c89584-qcgsh --grace-period=0 --force
+  141  kubectl delete pod --grace-period=0 --force my-nginx-67c9c89584-qcgsh
+  142  kubectl delete --grace-period=0 --force pod my-nginx-67c9c89584-qcgsh
+  143  kubectl delete -n defaults --grace-period=0 --force pod my-nginx-67c9c89584-qcgsh
+  144  kubectl delete -n default --grace-period=0 --force pod my-nginx-67c9c89584-qcgsh
+  145  kubectl patch pod my-nginx-67c9c89584-qcgsh -p '{"metadata":{"finalizers":null}}'
+  146  kubectl get all
+  147  kubectl describe pod/my-nginx-67c9c89584-c5kqg
+  148  clear
+  149  kubectl describe pod/my-nginx-67c9c89584-c5kqg
+  150  kubectl get pods
+  151  kubectl create -f tigera-operator.yaml 
+  152  kubectl delete -f tigera-operator.yaml 
+  153  kubectl delete -f calico.yaml
+  154  kubectl create -f calico.yaml
+  155  clear
+  156  ls
+  157  cat kubeconfig.sh 
+  158  vi kubeconfig.sh
+  159  history > remaining_history.txt

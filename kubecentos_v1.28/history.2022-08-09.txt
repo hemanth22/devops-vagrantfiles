@@ -1,0 +1,1000 @@
+   66  clear
+   67  kubectl create user user1
+   68  kubectl create user user1 -k
+   69  kubectl list users
+   70  kubectl wait
+   71  kubectl get
+   72  clear
+   73  kubectl get all --all-namespaces
+   74  history
+   75  kubectl get all --all-namespaces
+   76  history
+   77  ls
+   78  history | grep calico
+   79  kubectl delete -f calico.yaml 
+   80  kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+   81  kubectl delete -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+   82  wget -O tigera-operator.yaml
+   83  wget -O tigera-operator.yaml https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+   84  ls 
+   85  kubectl create -f tigera-operator.yaml 
+   86  kubectl get all
+   87  kubectl get namespaces
+   88  kubectl get all -n kube-system
+   89  kubectl get endpoints
+   90  kubectl get endpoints -n kube-system
+   91  kubectl get endpoint skooner -n kube-system
+   92  kubectl get endpoints skooner -n kube-system
+   93  kubectl get tokens -n kube-system
+   94  kubectl get token -n kube-system
+   95  kubectl get secret -n kube-system
+   96  kubectl get secret
+   97  kubectl describe secret/skooner-sa-token-lr7h8
+   98  kubectl get pods
+   99  kubectl describe pod my-nginx-67c9c89584-qcgsh
+  100  clear
+  101  kubectl get pods --all-namespaces | grep Terminating
+  102  kubectl get pods  | grep Terminating
+  103  kubectl delete pod my-nginx-67c9c89584-qcgsh --grace-period=0 --force
+  104  kubectl delete pod --grace-period=0 --force my-nginx-67c9c89584-qcgsh
+  105  kubectl delete --grace-period=0 --force pod my-nginx-67c9c89584-qcgsh
+  106  kubectl delete -n defaults --grace-period=0 --force pod my-nginx-67c9c89584-qcgsh
+  107  kubectl delete -n default --grace-period=0 --force pod my-nginx-67c9c89584-qcgsh
+  108  kubectl patch pod my-nginx-67c9c89584-qcgsh -p '{"metadata":{"finalizers":null}}'
+  109  kubectl get all
+  110  kubectl describe pod/my-nginx-67c9c89584-c5kqg
+  111  clear
+  112  kubectl describe pod/my-nginx-67c9c89584-c5kqg
+  113  kubectl get pods
+  114  kubectl create -f tigera-operator.yaml 
+  115  kubectl delete -f tigera-operator.yaml 
+  116  kubectl delete -f calico.yaml
+  117  kubectl create -f calico.yaml
+  118  clear
+  119  ls
+  120  cat kubeconfig.sh 
+  121  vi kubeconfig.sh
+  122  history > remaining_history.txt
+  123  code remaining_history.txt 
+  124  code kubeconfig.sh
+  125  kubectl convert --help
+  126  curl --help
+  127  ls -ltr
+  128  ls -ltr /vagrant/
+  129  ls -ltr /vagrant/metal-lb-config.yaml 
+  130  clear
+  131  scp 
+  132  ansible
+  133  pip -V
+  134  dnf install python39
+  135  history | grep metal
+  136  alternatives --config python
+  137  pip -V
+  138  pip3 -V
+  139  pip3 install pip
+  140  pip install ansible
+  141  pip3 install ansible
+  142  ansible-galaxy install hemanth22.vsftpd
+  143  cp -v /root/.ansible/roles/hemanth22.vsftpd/tests/test.yml sftpd
+  144  cp -v /root/.ansible/roles/hemanth22.vsftpd/tests/test.yml sftpd.yaml
+  145  ls
+  146  code sftpd.yaml
+  147  ansible-playbook sftpd.yaml 
+  148  hostname
+  149  hostname -i
+  150  hostname -I
+  151  ls -ltr /etc/vsftpd/
+  152  clear
+  153  code krew-install.sh
+  154  chmod 755 krew-install.sh 
+  155  ./krew-install.sh
+  156  code ~/.bashrc
+  157  echo $HOME
+  158  code ~/.bash_profile 
+  159  kubectl krew search
+  160  kubectl krew
+  161  code ~/.bashrc
+  162  code ~/.bash_profile
+  163  clear
+  164  cd mkdir hello
+  165  ls
+  166  mkdir hello
+  167  cd hello/
+  168  clear
+  169  kubectl krew install neat
+  170  kubectl get pods
+  171  kubectl get all -w
+  172  clear
+  173  kubectl get all 
+  174  kubectl delete pod/my-nginx-67c9c89584-vpbr2 
+  175  kubectl delete pod/my-nginx-67c9c89584-xcvzk
+  176  kubectl get all
+  177  clear
+  178  ls
+  179  clear
+  180  ls
+  181  kubectl get deployments -A
+  182  kubectl get deployments -n kube-system
+  183  kubectl get deployment/skooner -n kube-system
+  184  kubectl get deployment/skooner -n kube-system -o yaml
+  185  code command.sh
+  186  history
+  187  chmod 755 command.sh 
+  188  ./command.sh 
+  189  kubectl get deployment skooner -n kube-system -o yaml
+  190  clear
+  191  kubectl get deployment skooner -n kube-system -o yaml > skooner-kubernetes.yaml
+  192  cat skooner-kubernetes.yaml 
+  193  clear
+  194  kubectl neat
+  195  clear
+  196  kubectl neat -f ./skooner-kubernetes.yaml 
+  197  clear
+  198  code ~/.bashrc
+  199  code ~/.bash_profile
+  200  clear
+  201  ls -lt
+  202  exit
+  203  ls -ltr
+  204  clear
+  205  ls -ltr
+  206  kubectl get all
+  207  kubectl get endpoints -A
+  208  kubectl get all
+  209  clear
+  210  kubectl get all
+  211  kubectl get pods -o wide
+  212  curl -I 10.244.121.21
+  213  curl -I 10.244.121.20
+  214  cat /vagrant/metal-lb-config.yaml 
+  215  curl http://my-nginx.default.svc.cluster.local
+  216  curl https://my-nginx.default.svc.cluster.local
+  217  curl https://my-nginx.default.svc.cluster.local:80
+  218  curl http://my-nginx.default.svc.cluster.local:80
+  219  clear
+  220  kubectl get all
+  221  exit
+  222  ls -ltr
+  223  clear
+  224  ls
+  225  cat krew-install.sh 
+  226  clear
+  227  ls -ltr
+  228  clear
+  229  sfdisk --help
+  230  clear
+  231  ls
+  232  cat anaconda-ks.cfg 
+  233  clear
+  234  ls
+  235  ps -ef | grep kubeadm
+  236  ps -ef | grep kube
+  237  clear
+  238  kubectl get route
+  239  kubectl get routes
+  240  kubectl get ingress
+  241  kubectl get endpoints -A
+  242  hostname
+  243  hostname -i
+  244  hostname -I
+  245  sl
+  246  dnf install sl
+  247  sl
+  248  man sl
+  249  ls -a
+  250  sl -a
+  251  man sl
+  252  sl -l
+  253  sl -c
+  254  man sl
+  255  sl -F
+  256  sl -l
+  257  sl -la
+  258  sl -lac
+  259  sl -lacF
+  260  sl
+  261  sl hemanth
+  262  sl -la
+  263  sl -lc
+  264  sl -l
+  265  clear
+  266  exit
+  267  history | grep master-
+  268  history | grep taint
+  269  kubectl get nodes
+  270  kubectl get pods
+  271  clear
+  272  ls 
+  273  clear
+  274  history | grep master
+  275  ls
+  276  git clone https://github.com/hemanth22/SecretGist.git
+  277  vagrant halt
+  278  exit
+  279  ls 
+  280  ls -ltra
+  281  clear
+  282  kubectl get all
+  283  kubectl get services
+  284  clear
+  285  kubectl get services
+  286  curl :8080
+  287  clear
+  288  kubectl get svc
+  289  curl -vvv 10.244.11.0:8080
+  290  whoami
+  291  who
+  292  kubectl get curl
+  293  kubectl get all
+  294  curl localhost:8080
+  295  curl localhost:80
+  296  kubectl get endpoints
+  297  curl 10.244.121.50:80
+  298  clear
+  299  kubectl get all
+  300  kubectl describe service/my-nginx
+  301  curl 10.103.247.247:8080
+  302  curl 10.244.11.0:8080
+  303  clear
+  304  kubectl describe service/my-nginx
+  305  curl 10.244.121.50:8080
+  306  curl 10.244.121.51:8080
+  307  clear
+  308  kubectl describe service/my-nginx
+  309  clear
+  310  ls
+  311  kubectl get all
+  312  code help
+  313  kubectl get all
+  314  clear
+  315  ls
+  316  clear
+  317  clear
+  318  ps -ef | grep kube
+  319  clear
+  320  ls -ltr
+  321  cat sftpd
+  322  rm -rvf sftpd
+  323  clear
+  324  ls -ltr
+  325  cat kubeconfig.sh 
+  326  clear
+  327  kubectl get pods
+  328  kubectl get deployments
+  329  kubectl get services
+  330  kubectl get endpoints
+  331  curl 10.244.121.45:8088
+  332  curl http://my-nginx:80
+  333  curl http://my-nginx:8080
+  334  curl http://my-nginx:30611
+  335  clear
+  336  ls
+  337  cat kubeconfig.sh 
+  338  vi /vagrant/metal-lb-config.yaml
+  339  kubectl apply - /vagrant/metal-lb-config.yaml 
+  340  kubectl apply -f /vagrant/metal-lb-config.yaml 
+  341  clear
+  342  ls -ltr
+  343  kubectl get svc
+  344  ls
+  345  kubectl delete -f service-nginx.yaml 
+  346  kubectl delete -f nginx.yaml 
+  347  ls
+  348  cat nginx.yaml
+  349  cat service-nginx.yaml 
+  350  kubectl get all
+  351  kubectl create -f nginx.yaml 
+  352  vi service-nginx.yaml
+  353  kubectl create -f service-nginx.yaml
+  354  kubectl get all
+  355  kubectl get endpoints
+  356  curl nginx-loadbalancer:8000
+  357  curl 10.244.121.47:8000
+  358  clear
+  359  ls -ltr
+  360  kubectl get all
+  361  kubectl delete -f deployment.apps/my-nginx
+  362  kubectl delete deployment.apps/my-nginx
+  363  kubectl delete service/nginx-loadbalancer
+  364  clear
+  365  ls -ltr
+  366  rm -vf service-nginx.yaml 
+  367  clear
+  368  ls -ltr
+  369  clear
+  370  vi nginx.yaml
+  371  cat /dev/null > nginx.yaml 
+  372  vi nginx.yaml
+  373  clear
+  374  ls
+  375  kubectl create -f nginx.yaml
+  376  kubectl get deployments
+  377  kubectl expose --help
+  378  kubectl expose --help | grep -i load
+  379  kubectl get rc
+  380  kubectl get rs
+  381  kubectl get deployments.apps
+  382  kubectl expose deployment my-nginx --type='LoadBalancer' --port=80 --target-port=8000 --dry-run=client -o yaml
+  383  ls
+  384  cat /vagrant/metal-lb-config.yaml 
+  385  kubectl expose deployment my-nginx --type='LoadBalancer' --load-balancer-ip='10.244.10.0/16' --port=80 --target-port=8000 --dry-run=client -o yaml
+  386  kubectl expose deployment my-nginx --type='LoadBalancer' --load-balancer-ip='10.244.10.0' --port=80 --target-port=8000 --dry-run=client -o yaml
+  387  kubectl expose deployment my-nginx --type='LoadBalancer' --load-balancer-ip='10.244.10.0' --port=80 --target-port=8000 --dry-run=client -o yaml > nginx-service.yaml
+  388  kubectl create -f nginx-service.yaml 
+  389  ls -ltr
+  390  kubectl get all
+  391  kubectl get endponts
+  392  kubectl get endpoints
+  393  curl 10.244.121.49:8000
+  394  kubectl get service/my-nginx
+  395  kubectl describe service/my-nginx
+  396  curl https://my-nginx:32021
+  397  curl https://my-nginx:80
+  398  curl https://my-nginx:8000
+  399  kubectl expose deployment my-nginx --type='LoadBalancer' --load-balancer-ip='10.244.11.0' --port=80 --target-port=80 --dry-run=client -o yaml > nginx1.yaml
+  400  cat nginx1.yaml 
+  401  kubectl get all
+  402  kubectl delete service/my-nginx
+  403  kubectl apply -f nginx1.yaml 
+  404  kubectl get all
+  405  curl https://my-nginx:80
+  406  curl -v localhost:80
+  407  curl -v localhost:831712
+  408  clear
+  409  ls -ltr
+  410  cat nginx1.yaml 
+  411  cat nginx-service.yaml 
+  412  kubectl get pods --output=wide
+  413  kubectl get services --output=wide
+  414  kubectl get deployments --output=wide
+  415  clear
+  416  kubectl get all
+  417  kubectl delete service/my-nginx
+  418  clear
+  419  ls
+  420  cat nginx-service.yaml 
+  421  cat nginx1.yaml 
+  422  cat nginx.yaml 
+  423  kubectl get all
+  424  kubectl delete -f deployment.apps/my-nginx
+  425  kubectl delete deployment.apps/my-nginx
+  426  clear
+  427  kubectl get all
+  428  clear
+  429  lcear
+  430  clear
+  431  top
+  432  clear
+  433  ls
+  434  ls -ltr
+  435  clear
+  436  kubectl get all
+  437  ls
+  438  kubectl create -f nginx.yaml 
+  439  history
+  440  kubectl create -f nginx1.yaml
+  441  cat nginx1.yaml 
+  442  curl 10.244.11.0:80
+  443  clear
+  444  ls -ltr
+  445  cat nginx1.yaml 
+  446  cat nginx.yaml 
+  447  cat nginx-service.yaml 
+  448  clear
+  449  kubectl get all
+  450  kubectl delete service/my-nginx
+  451  clear
+  452  history
+  453  kubectl expose deployment my-nginx --type='LoadBalancer' --load-balancer-ip='10.244.11.0' --port=80 --target-port=80 --dry-run=client -o yaml > nginx1.yaml
+  454  curl -v 10.244.11.0:80
+  455  curl 10.244.11.0:80
+  456  kubectl get all
+  457  cat nginx1.yaml
+  458  kubectl create -f nginx1.yaml 
+  459  kubectl get all
+  460  kubectl get endpoints
+  461  curl 10.244.121.50:80
+  462  curl 10.244.121.51:80
+  463  clear
+  464  ls -ltr
+  465  kubectl delete -f nginx1.yaml 
+  466  kubectl expose deployment my-nginx --type='LoadBalancer' --load-balancer-ip='10.244.11.0' --port=8080 --target-port=80 --dry-run=client -o yaml > nginx1.yaml
+  467  kubectl get all
+  468  kubectl create -f nginx1.yaml
+  469  kubectl get all
+  470  kubectl get endpoints
+  471  curl -v 10.244.11.0:8080
+  472  curl 10.244.11.0:8080
+  473  cat nginx1.yaml 
+  474  clear
+  475  kubectl get endpoints
+  476  curl 10.244.121.50:80
+  477  clear
+  478  ls
+  479  ls -ltr
+  480  cat nginx1.yaml
+  481  kubectl expose --help
+  482  history
+  483  kubectl expose --help
+  484  clear
+  485  kubectl delete service/my-nginx
+  486  kubectl expose deployment my-nginx --type='LoadBalancer' --external-ip='10.244.11.0' --port=8080 --target-port=80 --dry-run=client -o yaml > nginx2.yaml
+  487  ls -ltr
+  488  kubectl create -f nginx2.yaml 
+  489  kubectl get all
+  490  curl 10.244.11.0:8080
+  491  curl 10.244.11.0:80
+  492  kubectl get endpoints
+  493  curl 10.244.121.50:80
+  494  cat /vagrant/metal-lb-config.yaml
+  495  clear
+  496  kubectl get all
+  497  curl https://my-nginx:8080
+  498  curl https://my-nginx:80
+  499  ls -ltra
+  500  clear
+  501  kubectl get all
+  502  kubectl get services
+  503  clear
+  504  kubectl get services
+  505  curl 10.244.11.0:8080
+  506  curl -vvv 10.244.11.0:8080
+  507  clear
+  508  kubectl get svc
+  509  curl -vvv 10.244.11.0:8080
+  510  clear
+  511  kubectl get all
+  512  cul http://my-nginx.svc.my-nginx:8080
+  513  curl http://my-nginx.svc.my-nginx:8080
+  514  curl http://my-nginx.svc.my-nginx:80
+  515  kubectl get svc kube-dns --namespace=kube-system
+  516  kubectl get endpoints kube-dns --namespace=kube-system -o wide
+  517  kubect exec -i -t kube-dns --namespace=kube-system -- nslookup kubernetes.default
+  518  kubectl exec -i -t kube-dns --namespace=kube-system -- nslookup kubernetes.default
+  519  kubectl get pods -n kube-system
+  520  clear
+  521  kubectl get pods -n kube-system
+  522  kubectl describe skooner-89b84468f-ddmlm -n kube-system
+  523  kubectl get pods -n kube-system
+  524  kubectl get deployments -n kube-system
+  525  kubectl exec -i -t deployments coredns 
+  526  kubectl exec -i -t deployment coredns 
+  527  kubectl exec deployment coredns 
+  528  kubectl exec deployment coredns  -- ls
+  529  kubectl exec -i -t coredns 
+  530  kubectl exec -i -t coredns ls -ltr
+  531  kubectl exec -i -t coredns -- ls
+  532  clear
+  533  ls -ltr
+  534  kubectl exec --help
+  535  kubectl get deployments
+  536  kubectl get all
+  537  kubectl exec deployment.apps/my-nginx -- ls
+  538  kubectl exec deployment.apps/my-nginx -- cat /etc/hosts
+  539  kubectl exec deployment.apps/my-nginx -- nslookup kubernetes.default
+  540  kubectl exec deployment.apps/my-nginx -- nslookup localhost
+  541  kubectl exec deployment.apps/my-nginx -- nslookup my-nginx
+  542  kubectl exec deployment.apps/my-nginx -- ip addr
+  543  kubectl exec deployment.apps/my-nginx -- nslookup 10.244.121.51
+  544  curl 10-244-121-51.my-nginx.default.svc.cluster.local:8080
+  545  curl 10-244-121-51.my-nginx.default.svc.cluster.local:80
+  546  clear
+  547  kubectl exec deployment.apps/my-nginx -- nslookup 10.244.121.51
+  548  calicoctl node status
+  549  kubectl get events
+  550  kubectl get deploymnents -n kube-system
+  551  kubectl get deployments -n kube-system
+  552  kubectl get all -n kube-system
+  553  kubectl exec deployment.apps/coredns -- nslookup kubernetes.default
+  554  kubectl exec deployment.apps/coredns -n kube-system -- nslookup kubernetes.default
+  555  kubectl -n kube-system exec deployment.apps/coredns -- nslookup kubernetes.default
+  556  kubectl exec --help
+  557  clear
+  558  kubectl exec deployment.apps/coredns -n kube-system -- nslookup kubernetes.default
+  559  kubectl exec deployment.apps/coredns -n kube-system -- ls
+  560  kubectl exec deployment.apps/coredns -n kube-system -- nslookup kubernetes.default
+  561  clear
+  562  kubectl get all -n kube-system
+  563  clear
+  564  kubectl get all
+  565  kubectl describe service/my-nginx
+  566  kubectl config get-contexts | awk {'print $2'}
+  567  cul my-nginx.default.svc.cluster.local:8080
+  568  curl my-nginx.default.svc.cluster.local:8080
+  569  kubectl get namespace
+  570  kubectl config get-context
+  571  kubectl config -h
+  572  kubectl config get-contexts
+  573  kubectl describe configmap coredns -n kube-system
+  574  ls
+  575  kubectl get all
+  576  clear
+  577  kubectl run curl --image=alpine/curl --rm -it -- sh
+  578  kubectl get svc
+  579  code np.yml
+  580  kubectl create -f np.yml 
+  581  kubectl get all --show-labels
+  582  kubectl get all
+  583  clear
+  584  kubectl delete -f np.yml 
+  585  clear
+  586  ls -ltr
+  587  cat nginx-service.yaml 
+  588  kubectl delete -f nginx-service.yaml 
+  589  code nginx-service.yaml 
+  590  kubectl create -f nginx-service.yaml 
+  591  kubectl get svc --show-labels
+  592  kubectl create -f np.yml 
+  593  kubectl get pods
+  594  clear
+  595  kubectl get endpoints
+  596  kubectl describe pod my-nginx
+  597  kubectl describe svc my-nginx
+  598  clear
+  599  ls
+  600  kubectl delete nginx-service.yaml 
+  601  kubectl delete -f nginx-service.yaml 
+  602  clear
+  603  ls -ltr
+  604  cat nginx-service.yaml 
+  605  clear
+  606  ls -ltr
+  607  cat nginx1.yaml 
+  608  cat nginx2.yaml 
+  609  ls
+  610  ls -ltr
+  611  history | grep kubectl
+  612  history | grep kubectl create
+  613  history | grep 'kubectl create'
+  614  kubectl create -f nginx2.yaml
+  615  kubectl get all
+  616  kubectl get endpoints
+  617  clear
+  618  kubectl get all
+  619  curl 10.244.11.0:8080
+  620  ansible --version
+  621  code listns.py
+  622  chmod 777 listns.py 
+  623  python3 listns.py 
+  624  python3 -m pip install kubernetes
+  625   ansible-galaxy install hemanth22.pipproxy
+  626  wget https://raw.githubusercontent.com/hemanth22/keepalive_jfrog/main/pipproxy.yml
+  627  ansible-playbook pipproxy.yml 
+  628  python3 -m pip install kubernetes
+  629  clear
+  630  python3 -m pip install requests
+  631  clear
+  632  python3 -m pip install tabulatae
+  633  python3 -m pip install tabulate
+  634  clear
+  635  python3 listns.py
+  636  code createapod.py
+  637  python3 createapod.py
+  638  clear
+  639  sudo kubectl get nodes -o wide | grep md | grep Ready | awk '{print $6}'
+  640  clear
+  641  ansible-galaxy collection list
+  642  ansible-galaxy collection install kubernetes.core
+  643  code list_ns.yaml
+  644  clear
+  645  chmod 777 list_ns.yaml
+  646  ansible-playbook list_ns.yaml
+  647  hostname
+  648  ansible-playbook list_ns.yaml
+  649  clear
+  650  ansible-playbook list_ns.yaml
+  651  clear
+  652  ansible-playbook list_ns.yaml
+  653  yum install jq
+  654  ansible-playbook list_ns.yaml
+  655  python3 -m pip install jmespath
+  656  ansible-playbook list_ns.yaml
+  657  kubectl get pods -A
+  658  clear
+  659  ansible-playbook list_ns.yaml
+  660  clear
+  661  vi cronjob.playbook
+  662  codei cronjob.playbook
+  663  code cronjob.playbook
+  664  chmod 777 cronjob.playbook
+  665  ansible-playbook cronjob.playbook
+  666  crontab -l
+  667  ansible-playbook cronjob.playbook
+  668  crontab -l
+  669  code removecronjob.playbook
+  670  clear
+  671  ls -ltr
+  672  chmod 777 removecronjob.playbook 
+  673  code removecronjob.playbook
+  674  ansible-playbook removecronjob.playbook
+  675  crontab -l
+  676  ls
+  677  ls -ltr
+  678  ansible-playbook removecronjob.playbook
+  679  ansible-playbook -vvv removecronjob.playbook
+  680  crontab -l
+  681  clear
+  682  kubectl get pods
+  683  ls -ltr
+  684  cat nginx.yaml 
+  685  code nginx.yaml
+  686  kubectl apply -f nginx.yaml
+  687  clear
+  688  kubectl apply -f nginx.yaml
+  689  clear
+  690  kubectl apply -f nginx.yaml
+  691  clear
+  692  kubectl get deploy
+  693  kubectl get deploy my-nginx
+  694  kubectl get pods
+  695  clear
+  696  kubectl get svc
+  697  clear
+  698  kubectl get pods -o json
+  699  clear
+  700  yum install jq 
+  701  kubectl get pods -o json | jq
+  702  kubectl get pods -o json | jq -c 'paths' 
+  703  kubectl get pods -o json | grep IP
+  704  kubectl get pods -o json | grep InternalIP
+  705  kubectl get pods -o json | grep -i InternalIP
+  706  kubectl get pods -o json | jq
+  707  code test.txt
+  708  clear
+  709  kubectl get pods -o wide
+  710  kubectl get pods -o json | jq
+  711  kubectl get pods -o json | jq -c 'paths'
+  712  kubectl get pods -o json | jq -c 'paths' | grep hostIP
+  713  kubectl get pods -o json | jq -c 'paths' | grep hostIP | grep -v "metadata"
+  714  kubectl get deploy my-nginx
+  715  kubectl get deploy my-nginx -o wide
+  716  kubectl get pods -o json | jq -c 'paths' | grep hostIP
+  717  kubectl get nodes -o jsonpath='{.items[0].status.addresses}' | jq
+  718  kubectl get pods -o jsonpath='{.items[0].status.addresses}' | jq
+  719  kubectl get pods -o jsonpath='{.items[0].status}'
+  720  kubectl get pods -o jsonpath='{.items[0].status}' | jq
+  721  kubectl get pods -o jsonpath='{.items[0].status.hostIP}' | jq
+  722  kubectl get pods -o json | jq -c 'paths' | grep hostIP
+  723  kubectl get pods -o json | grep hostIP -B 5 -A 5
+  724  kubectl get nodes -o json | grep InternalIP -B 5 -A 5
+  725  kubectl get pods -o json | jq -c 'paths' | grep hostIP
+  726  kubectl get pods -o jsonpath='{.items[0].status.hostIP[*]}' | jq
+  727  kubectl get pods -o json | jq -c 'paths' | grep hostIP | grep -v "metadata"
+  728  kubectl get pods -o json | jq -c 'paths' | grep hostIP | grep -v "metadata" | grep hostIP
+  729  kubectl get pods -o jsonpath='{.items[0].status.hostIP[*].hostIP}' | jq
+  730  clear
+  731  kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
+  732  kubectl get nodes -o json | grep InternalIP -B 5 -A 5
+  733  kubectl get nodes -o json | jq -c 'paths' | grep type
+  734  kubectl get nodes -o json | jq -c 'paths' | grep type | grep -v "metadata"
+  735  kubectl get nodes -o json | jq -c 'paths' | grep type | grep -v "metadata" | grep address
+  736  kubectl get nodes -o jsonpath='{.items[0].status.addresses}' | jq
+  737  kubectl get nodes -o jsonpath='{.items[0].status.addresses[*]}' | jq
+  738  kubectl get pods -o jsonpath='{.items[0].status.hostIP[*]}' | jq
+  739  kubectl get pods -o json | jq -c 'paths' | grep hostIP | grep -v "metadata"
+  740  clear
+  741  kubectl get pods -o jsonpath='{.items[0]}' | jq
+  742  kubectl get pods -o jsonpath='{.items[0].hostIP}' | jq
+  743  kubectl get pods -o jsonpath='{.items[0].podIP}' | jq
+  744  kubectl get pods -o jsonpath='{.items[0].podIPs}' | jq
+  745  kubectl get pods -o jsonpath='{.items[0].status}' | jq
+  746  kubectl get pods -o jsonpath='{.items[0].status.}' | jq
+  747  kubectl get pods -o jsonpath='{.items[0].status.conditions}' | jq
+  748  kubectl get pods -o jsonpath='{.items[0].status.conditions[*]}' | jq
+  749  kubectl get pods -o jsonpath='{.items[0].status.podIPs}' | jq
+  750  kubectl get pods -o jsonpath='{.items[0].status.podIPs.ip}' | jq
+  751  kubectl get pods -o jsonpath='{.items[0].status.podIPs[*].ip}' | jq
+  752  kubectl get pods -o jsonpath='{.items[0].status.podIPs[*]}' | jq
+  753  kubectl get pods -o jsonpath='{.items[0].status.podIPs[*].ip}' | jq
+  754  kubectl get pods -o jsonpath='{.items[0].status.podIPs[*]}' | jq
+  755  kubectl get pods -o jsonpath='{.items[*].status.podIPs[*]}' | jq
+  756  clear
+  757  kubectl get pods -o jsonpath='{.items[*].status.podIPs[*]}' | jq
+  758  kubectl get pods -o jsonpath='{.items[*].status.podIPs[*].ip}' | jq
+  759  kubectl get pods -o jsonpath='{.items[*].status.podIPs[*].[]}' | jq
+  760  kubectl get pods -o jsonpath='{.items[*].status.podIPs[*].ip}' | jq
+  761  kubectl get pods -o jsonpath='{.items[*].status.podIPs[ip]}' | jq
+  762  kubectl get pods -o jsonpath='{.items[*].status.podIPs[*]}' | jq
+  763  clear
+  764  kubectl get pods -o=custom-columns=POD:.metadata.name
+  765  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status
+  766  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.status
+  767  clear
+  768  kubectl get pods -o jon | grep status
+  769  kubectl get pods -o jon | grep -i status
+  770  kubectl get pods -o json | grep -i status
+  771  kubectl get pods -o json | grep -i status -A 3
+  772  kubectl get pods -o json | grep -i status -A 5 -B 5
+  773  kubectl get pods -o json | grep -i status -A 10 -B 10
+  774  clear
+  775  kubectl get pods -o json | jq
+  776  kubectl get pods -o json | jq | grep json
+  777  kubectl get pods -o json | jq -c 'paths' 
+  778  kubectl get pods -o json | jq -c 'paths' | grep status
+  779  kubectl get pods -o jsonpath='{.items[*].status.containerStatuses.*.state}'
+  780  kubectl get pods -o jsonpath='{.items[*].status.containerStatuses[?(@.state=="state")]}'
+  781  kubectl get pods -o json | jq -c 'paths' | grep phsdr
+  782  kubectl get pods -o json | jq -c 'paths' | grep phase
+  783  kubectl get pods -o jsonpath='{.items[*].status.}'
+  784  kubectl get pods -o jsonpath='{.items[*].status}'
+  785  kubectl get pods -o jsonpath='{.items[*].status.phase}'
+  786  history
+  787  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase
+  788  kubectl get pods -o json | jq -c 'paths' | grep ip
+  789  kubectl get pods -o jsonpath='{.items[*].status.podIPs.ip}'
+  790  kubectl get pods -o jsonpath='{.items[*].status.podIPs.*.ip}'
+  791  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase:PodIP:.status.podIPs.*.ip
+  792  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase:PodIP:.status.podIPs
+  793  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase:PODIP:.status.podIPs
+  794  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase:PODIPS:.status.podIPs
+  795  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PODIPS:.status.podIPs
+  796  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PODIPS:.status.podIPs.*.ip
+  797  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIPS:.status.podIPs.*.ip
+  798  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip
+  799  clear
+  800  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip
+  801  kubectl get pods -o json | grep nginx
+  802  kubectl get pods -o json | grep deployment
+  803  kubectl get pods -o json | grep -i  deployment
+  804  kubectl get pods -o json | grep -i my-nginx
+  805  kubectl get pods -o json | grep -i my-nginx -A 10
+  806  kubectl get pods -o json | grep -i my-nginx -A 10 -B 10
+  807  kubectl get pods -o json | jq -c 'paths' | grep containerStatuses
+  808  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  809  kubectl get pods -o json | grep -i cluster -A 10 -B 10
+  810  clear
+  811  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  812  kubectl get pods -o json | jq -c 'paths' | grep cluster
+  813  cat nginx2.yaml 
+  814  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  815  kubectl get pods -o json | jq -c 'paths' | grep externalIPs
+  816  kubectl get pods -o json | jq -c 'paths' | grep -i externalIPs
+  817  kubectl get pods -o json | jq -c 'paths' 
+  818  gwt -o pods.yaml https://raw.githubusercontent.com/collabnix/kubelabs/master/pods101/pods01.yaml
+  819  wget -o nginxpods.yaml https://raw.githubusercontent.com/collabnix/kubelabs/master/pods101/pods01.yaml
+  820  kubectl apply -f nginxpods.yaml 
+  821  code nginxpods.yaml
+  822  kubectl apply -f nginxpods.yaml 
+  823  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  824  kubectl create deployment --image=httpd:bullseye apache --dry-run=client -o yaml > apache.yaml
+  825  code apache.yaml
+  826  clear
+  827  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip
+  828  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  829  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip
+  830  kubectl apply -f apache.yaml --dry-run=client
+  831  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  832  kubectl apply -f apache.yaml
+  833  clear
+  834  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  835  kubectl get deployments
+  836  kubectl api-resources --verbs=list,get
+  837  kubectl api-resources --verbs=list
+  838  kubectl api-resources --verbs=get
+  839  kubectl api-resources --api-group=extensions
+  840  clear
+  841  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  842  kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'
+  843  kubectl get pods -o json | jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' | grep -v null | sort | uniq
+  844  kubectl get pods -o json | jq -c 'paths|join(".")'
+  845  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name
+  846  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name,StorageClass:.status.qosClass
+  847  kubectl get events --sort-by=.metadata.creationTimestamp
+  848  kubectl get services --sort-by=.metadata.name
+  849  kubectl get services --sort-by=.metadata.name -o wide
+  850  clear
+  851  ls -ltr /
+  852  cd /cache2
+  853  clear
+  854  echo -n "s33msi4" | base64 -w0
+  855  echo -n "jane" | base64 -w0
+  856  clear
+  857  kubectl get pods -o=jsonpath="{range .items[*]}{.metadata.name}{\"\t\"}{.status.startTime}{\"\n\"}{end}"
+  858  kubectl get pods 
+  859  kubectl get deploy
+  860  kubectl get pods -o=jsonpath="{range .items[*]}{.metadata.name}{\"\t\"}{.status.startTime}{\"\n\"}{end}"
+  861  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.status.containerStatuses.*.name,StorageClass:.status.qosClass
+  862  kubectl get pods -o=json | json -c 'paths
+  863  kubectl get pods -o=json | json -c 'paths'
+  864  kubectl get pods -o json | json -c 'paths'
+  865  kubectl get pods -o json | jq -c 'paths'
+  866  kubectl get pods -o json | jq -c 'paths' | grep -i app
+  867  clear
+  868  lcear
+  869  clear
+  870  kubectl get pods -o json | jq -c 'paths' | grep -i app
+  871  kubectl get pods -o json | jq -c 'paths|join(".")'
+  872  kubectl get deploy my-nginx --subresource=status
+  873  kubectl get deployment my-nginx --subresource=status
+  874  clearkubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name
+  875  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name
+  876  clear
+  877  clearkubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name
+  878  clearkubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.app
+  879  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.app
+  880  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.label.app
+  881  kubectl get pods -o json | jq -c 'paths' | grep -i app
+  882  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.labels.app
+  883  clearkubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name
+  884  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name
+  885  kubectl get pods -o=jsonpath="{range .items[*]}{.metadata.name}{\"\t\"}{.status.startTime}{\"\n\"}{end}"
+  886  clear
+  887  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name
+  888  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,DeploymentName:.metadata.name | grep -i nginx
+  889  kubectl get pods -o wide
+  890  clear
+  891  kubectl get pods -o json | jq -c 'paths' | grep -i app
+  892  kubectl get pods -o json | jq -c 'paths' | grep -i nodes
+  893  kubectl get pods -o json | jq -c 'paths' | grep -i node
+  894  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,nodeName:.spec.nodeName
+  895  clear
+  896  kubectl get pods -o json | jq -c 'paths' | grep -i imagae
+  897  kubectl get pods -o json | jq -c 'paths' | grep -i image
+  898  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,nodeName:.spec.nodeName,Image:.spec.containers.*.image
+  899  clear
+  900  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,nodeName:.spec.nodeName,Image:.spec.containers.*.image
+  901  kubectl get nodes -o json | jq -c 'paths' | grep type | grep -v "metadata" | grep address
+  902  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,nodeName:.spec.nodeName,Image:.spec.containers.*.image
+  903  kubectl get nodes -o json | jq -c 'paths'
+  904  kubectl get nodes -o json | jq -c 'paths' | grep -i namespace
+  905  kubectl get nodes -o json | grep -i namespace -A 20 -B 20
+  906  kubectl get nodes -o json | grep -i namespacr
+  907  kubectl get pods -o json | jq -c 'paths|join(.)'
+  908  clear
+  909  kubectl get pods -o json | jq -c 'paths|join(".")'
+  910  kubectl get pods -o json | jq -c 'paths|join(".")' | grep nsmaespace
+  911  kubectl get pods -o json | jq -c 'paths|join(".")' | grep namaespace
+  912  kubectl get pods -o json | jq -c 'paths|join(".")' | grep namespace
+  913  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,nodeName:.spec.nodeName,Image:.spec.containers.*.image,Namespace:.metadata.namespace
+  914  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- env; done
+  915  clear
+  916  kubectl get pods -o=custom-columns=POD:.metadata.name,STATUS:.status.phase,PodIps:.status.podIPs.*.ip,nodeName:.spec.nodeName,Image:.spec.containers.*.image,Namespace:.metadata.namespace
+  917  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- env; done
+  918  ipcalc -b 10.244.121.17/15
+  919  ipcalc -b 10.244.121.17/16
+  920  ipcalc -b 10.244.121.0/16
+  921  ipcalc -b 10.244.121.0/24
+  922  clear
+  923  ipcalc -b 10.244.0.0/24
+  924  ipcalc -b 10.244.0.0/16
+  925  ipcalc -b 10.244.0.0/24
+  926  ipcalc -b 10.244.0.0/25
+  927  ipcalc 
+  928  ipcalc --minaddr 10.244.0.0/24
+  929  ipcalc --addresses 10.244.0.0/24
+  930  ipcalc --addresses 10.244.0.0/16
+  931  kubectl get NetworkPolicy
+  932  clear
+  933  history | grep curl
+  934  curl 10-244-121-51.my-nginx.default.svc.cluster.local:8080
+  935  kubectl run curl --image=alpine/curl --rm -it -- sh
+  936  clear
+  937  kubectl get NetworkPolicy
+  938  kubectl get nodes -o json | jq -c 'paths|join(".")'
+  939  kubectl get nodes -o json | grep host
+  940  kubectl get nodes -o json | grep hostname
+  941  kubectl get nodes -o json | grep hostname -i
+  942  kubectl get nodes -o json | grep hostname -I
+  943  kubectl get nodes -o json | grep hostname -i
+  944  kubectl get nodes -o json | grep hostname -i -A 10 -B 10
+  945  clear
+  946  kubectl get nodes -o json | grep hostname -i -A 20 -B 20
+  947  clear
+  948  kubectl get pods -o json | grep hostname -i -A 20 -B 20
+  949  kubectl get pods -o json | grep host
+  950  kubectl get pods -o json | grep host -i A 20 -B 20
+  951  kubectl get pods -o json | grep host A 20 -B 20
+  952  kubectl get pods -o json | grep -i host -A 20 -B 20
+  953  kubectl get nodes -o json | jq -c 'paths|join(".")' | grep -i hostip
+  954  kubectl get nodes -o json | 
+  955  kubectl get nodes -o json | jq -c 'paths|join(".")' 
+  956  kubectl get nodes -o json | jq -c 'paths'
+  957  kubectl get nodes -o json | jq -c 'paths' | grep -i host
+  958  kubectl get nodes -o json | jq -c 'paths|join(".")' | grep -i hostip
+  959  kubectl get pods -o json | grep -i host -A 20 -B 20
+  960  kubectl get nodes -o json | jq -c 'paths|join(".")' | grep apiVersion
+  961  kubectl get nodes -o json | jq -c 'paths|join(".")' | grep -i apiVersion
+  962  kubectl get nodes -o json | jq -c 'paths|join(".")' | grep -i apiVersion | clear
+  963  clear
+  964  ls -ltr
+  965  kubectl get pods
+  966  clear
+  967  kubectl get svc -o wide
+  968  kubectl get endpoints
+  969  kubectl get endpoints -o wide
+  970  nslookup 10.0.2.15:6443
+  971  yum whatprovides */nslookup
+  972  yum install bind-utils
+  973  nslookup 10.0.2.15:6443
+  974  kubectl get endpoints -o wide
+  975  kubectl get endpoints -o json
+  976  kubectl exec --r, busybox -- nslookup kubernetes.default
+  977  kubectl exec --rm busybox -- nslookup kubernetes.default
+  978  kubectl exec busybox -- nslookup kubernetes.default
+  979  hostname --fqdn
+  980  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- env; done
+  981  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname; done
+  982  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname --fqdn; done
+  983  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname -d; done
+  984  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname -fqdn; done
+  985  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname -f; done
+  986  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname -i; done
+  987  for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod -- hostname -s; done
+  988  clear
+  989  kubectl get pods
+  990  kubectl get svc
+  991  curl my-nginx.default.cluster.local
+  992  kubectl logs --namespace=kube-system $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name) -c kubedns
+  993  kubectl logs --namespace=kube-system $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name) -c dnsmasq
+  994  kubectl logs --namespace=kube-system $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name) -c healthz
+  995  clear
+  996  hostname -i
+  997  hostname -I
+  998  terraform
+  999  ls -ltr
+ 1000  clear
+ 1001  ls -ltr
+ 1002  kubectl get pods -n kube-system
+ 1003  kubectl delete pod skooner-89b84468f-ddmlm  -n kube-system
+ 1004  kubectl get pods -n kube-system
+ 1005  clear
+ 1006  kubectl get pods -n kube-system
+ 1007  kubectl get pod skooner-89b84468f-f2xnd -n kube-system
+ 1008  kubectl get delete skooner-89b84468f-f2xnd -n kube-system
+ 1009  kubectl delete pod skooner-89b84468f-f2xnd -n kube-system
+ 1010  kubectl get all -n kube-system
+ 1011  clear
+ 1012  kubectl get all -n kube-system
+ 1013  kubectl get endpoints
+ 1014  kubectl get endpoints -n all
+ 1015  kubectl get endpoints -A
+ 1016  kubectl get all -A
+ 1017  kubectl delete deployment.apps/apache
+ 1018  yum install -y yum-utils
+ 1019  yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+ 1020  yum -y install terraform
+ 1021  terraform -help
+ 1022  terraform -install-autocomplete
+ 1023  terraform init
+ 1024  clear
+ 1025  cat ~/.bashrc 
+ 1026  clear
+ 1027  ls -ltr
+ 1028  clear
+ 1029  ls -ltr
+ 1030  clear
+ 1031  cat apache.yaml 
+ 1032  kubectl api-resource
+ 1033  kubectl api-resources
+ 1034  clear
+ 1035  kubectl api-resources --namespaced=true
+ 1036  clear
+ 1037  kubectl api-resources --namespaced=true
+ 1038  clear
+ 1039  kubectl get all
+ 1040  kubectl get pods
+ 1041  kubectl exec my-nginx-6f4d994bc9-6rsg5 --sh -c hostname
+ 1042  kubectl exec my-nginx-6f4d994bc9-6rsg5 --sh -c 'hostname'
+ 1043  kubectl exec my-nginx-6f4d994bc9-6rsg5 -- sh -c 'hostname'
+ 1044  kubectl exec my-nginx-6f4d994bc9-6rsg5 -- sh -c 'nslookup hostname.nginx'
+ 1045  kubectl exec my-nginx-6f4d994bc9-6rsg5 -- sh -c 'nslookup my-nginx-6f4d994bc9-6rsg5.nginx'
+ 1046  cat /etc/resolv.conf 
+ 1047  cp -v /etc/resolv.conf /etc/resolv.conf.$(date +%Y%m%d)
+ 1048  cp -v /etc/resolv.conf /etc/resolv.conf.$(date +%y%m%d)
+ 1049  cp -v /etc/resolv.conf /etc/resolv.conf.$(date +'%Y%m%d')
+ 1050  cp -v /etc/resolv.conf /etc/resolv.conf.20220809
+ 1051  ls -ltr
+ 1052  vi /etc/resolv.conf
+ 1053  ls -ltr
+ 1054  clear
+ 1055  ls -ltr
+ 1056  clear
+ 1057  kubectl exec my-nginx-6f4d994bc9-6rsg5 -- sh -c 'nslookup my-nginx-6f4d994bc9-6rsg5.nginx'
+ 1058  kubectl exec my-nginx-6f4d994bc9-6rsg5 -- sh -c 'nslookup kubernetes.default'
+ 1059  kubectl version
+ 1060  kubectl version --short
+ 1061  iptables -w -P FORWARD ACCEPT
+ 1062  kubectl exec my-nginx-6f4d994bc9-6rsg5 -- sh -c 'nslookup kubernetes.default'
+ 1063  clear
+ 1064  history | grep kubectl
+ 1065  history > history.2022-08-09.txt

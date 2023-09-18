@@ -1,0 +1,84 @@
+- hosts: localhost
+  gather_facts: true
+  tasks:
+  - name: Ensure vsftpd server is installed
+    yum:
+      name: vsftpd
+      state: present
+
+  - name: Enable ascii upload
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: '#ascii_upload_enable=YES'
+      replace: 'ascii_upload_enable=YES'
+      backup: true
+
+  - name: Enable ascii download
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: '#ascii_download_enable=YES'
+      replace: 'ascii_download_enable=YES'
+      backup: true
+
+  - name: Enable chroot_local_user
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: '#chroot_local_user=YES'
+      replace: 'chroot_local_user=YES'
+      backup: true
+
+  - name: Enable chroot_list_enable
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: '#chroot_list_enable=YES'
+      replace: 'chroot_list_enable=YES'
+      backup: true
+
+  - name: Enable chroot_list_file
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: '#chroot_list_file=/etc/vsftpd/chroot_list'
+      replace: 'chroot_list_file=/etc/vsftpd/chroot_list'
+      backup: true
+
+  - name: Enable ls_recurse_enable
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: '#ls_recurse_enable=YES'
+      replace: 'ls_recurse_enable=YES'
+      backup: true
+
+  - name: Enable IPv4 listener
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: 'listen=NO'
+      replace: 'listen=YES'
+      backup: true
+
+  - name: Disable IPv6 listener
+    replace:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: 'listen_ipv6=YES'
+      replace: 'listen_ipv6=NO'
+      backup: true
+
+  - name: follow the line description
+    ansible.builtin.shell: echo "# add follows to the end" >> /etc/vsftpd/vsftpd.conf
+
+  - name: root directory description
+    ansible.builtin.shell: echo "# specify root directory ( if don't specify, users' home directory become FTP home directory)" >> /etc/vsftpd/vsftpd.conf
+
+  - name: Enable local_root
+    ansible.builtin.shell: echo "local_root=public_html" >> /etc/vsftpd/vsftpd.conf
+
+  - name: localtime description
+    ansible.builtin.shell: echo "# use localtime" >> /etc/vsftpd/vsftpd.conf
+
+  - name: Enable use_localtime
+    ansible.builtin.shell: echo "use_localtime=YES" >> /etc/vsftpd/vsftpd.conf
+
+  - name: seccomp description
+    ansible.builtin.shell: echo "turn off for seccomp filter ( if you cannot login, add this line )" >> /etc/vsftpd/vsftpd.conf
+
+  - name: Disable seccomp_sandbox
+    ansible.builtin.shell: echo "seccomp_sandbox=NO" >> /etc/vsftpd/vsftpd.conf
