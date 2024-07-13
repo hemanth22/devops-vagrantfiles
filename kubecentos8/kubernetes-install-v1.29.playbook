@@ -1,0 +1,296 @@
+---
+- name: kubernetes v1.29
+  hosts: localhost
+  become: true
+  gather_facts: false
+  environment:
+    ansible_python_interpreter: /usr/bin/python3.11
+
+  tasks:
+    - name: Install the latest version of yum utils
+      ansible.builtin.dnf:
+        name: yum-utils
+        state: latest
+
+    - name: Install the latest version of nfs utils
+      ansible.builtin.dnf:
+        name: nfs-utils
+        state: latest
+
+    - name: Install the latest version of bash-completion
+      ansible.builtin.dnf:
+        name: bash-completion
+        state: latest
+
+    - name: Install the latest version of git
+      ansible.builtin.dnf:
+        name: git
+        state: latest
+
+    - name: Install the latest version of epel-release
+      ansible.builtin.dnf:
+        name: epel-release
+        state: latest
+
+    - name: Install the latest version of device-mapper-persistent-data
+      ansible.builtin.dnf:
+        name: device-mapper-persistent-data
+        state: latest
+
+    - name: Install the latest version of lvm2
+      ansible.builtin.dnf:
+        name: lvm2
+        state: latest
+
+    - name: Install the latest version of wget
+      ansible.builtin.dnf:
+        name: wget
+        state: latest
+
+    - name: Install the latest version of curl 
+      ansible.builtin.dnf:
+        name: curl
+        state: latest
+
+    - name: Install the latest version of jq
+      ansible.builtin.dnf:
+        name: jq
+        state: latest
+
+    - name: Install the latest version of tar
+      ansible.builtin.dnf:
+        name: tar
+        state: latest
+
+    - name: Install the latest version of perl
+      ansible.builtin.dnf:
+        name: perl
+        state: latest
+
+    - name: Install the latest version of perl-Digest-SHA
+      ansible.builtin.dnf:
+        name: perl-Digest-SHA
+        state: latest
+
+    - name: Stopped firewalld service
+      ansible.builtin.systemd:
+        name: firewalld
+        state: stopped
+
+    - name: Stopped firewalld service
+      ansible.builtin.systemd:
+        name: firewalld
+        enabled: false
+        masked: true
+
+    - name: Configure br_netfilter
+      ansible.builtin.blockinfile:
+        path: "/etc/modules-load.d/k8s.conf"
+        block: |
+          br_netfilter
+        create: true
+
+    - name: Check k8s.conf file content
+      ansible.builtin.lineinfile:
+        path: /etc/modules-load.d/k8s.conf
+        line: 'br_netfilter'
+        regexp: '^br_netfilter$'
+        state: present
+      register: br_netfilter_result
+
+    - name: Report br_netfilter_result
+      ansible.builtin.debug:
+        var: br_netfilter_result
+
+    - name: Configure bridge call
+      ansible.builtin.blockinfile:
+        path: "/etc/sysctl.d/k8s.conf"
+        block: |
+          net.bridge.bridge-nf-call-ip6tables = 1
+          net.bridge.bridge-nf-call-iptables = 1
+        create: true
+
+    - name: Check k8s.conf file content on ip6tables
+      ansible.builtin.lineinfile:
+        path: /etc/sysctl.d/k8s.conf
+        line: 'net.bridge.bridge-nf-call-ip6tables = 1'
+        regexp: '^net.bridge.bridge-nf-call-ip6tables = 1$'
+        state: present
+      register: result_ip6tables
+
+    - name: Check k8s.conf file content on iptables
+      ansible.builtin.lineinfile:
+        path: /etc/sysctl.d/k8s.conf
+        line: 'net.bridge.bridge-nf-call-iptables = 1'
+        regexp: '^net.bridge.bridge-nf-call-iptables = 1$'
+        state: present
+      register: result_iptables
+
+    - name: Configure crio
+      ansible.builtin.blockinfile:
+        path: "/etc/modules-load.d/crio.conf"
+        block: |
+          overlay
+          br_netfilter
+        create: true
+
+    - name: Check k8s.conf file content on ip6tables
+      ansible.builtin.lineinfile:
+        path: /etc/modules-load.d/crio.conf
+        line: 'overlay'
+        regexp: '^overlay$'
+        state: present
+      register: result_crio_overlay
+
+    - name: Check k8s.conf file content on iptables
+      ansible.builtin.lineinfile:
+        path: /etc/modules-load.d/crio.conf
+        line: 'br_netfilter'
+        regexp: '^br_netfilter$'
+        state: present
+      register: result_crio_br_netfilter
+
+    - name: Configure k8s files with system control
+      ansible.builtin.shell: sysctl --system
+
+    - name: Configure YUM Repo for kubernetes
+      ansible.builtin.blockinfile:
+        path: "/etc/yum.repos.d/kubernetes.repo"
+        block: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+          exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+        create: true
+
+    - name: Set SELinux to permissive
+      ansible.builtin.shell: setenforce 0
+
+    - name: Update SELinux config
+      ansible.builtin.replace:
+        path: /etc/selinux/config
+        regexp: '^SELINUX=enforcing$'
+        replace: 'SELINUX=permissive'
+
+    - name: Set SELinux to permissive
+      ansible.builtin.shell: cat /etc/selinux/config
+
+    - name: Verify SELinux config
+      ansible.builtin.slurp:
+        src: /etc/selinux/config
+      register: selinux_config
+
+    - name: Debug SELinux config
+      ansible.builtin.debug:
+        msg: "{{ selinux_config['content'] | b64decode }}"
+
+    - name: Disable swap
+      ansible.builtin.shell: swapoff -a
+
+    - name: Backup fstab
+      ansible.builtin.copy:
+        dest: /etc/fstab.bak
+        force: true
+        mode: '0644'
+        src: /etc/fstab
+
+    - name: Verify fstab backup file exists
+      ansible.builtin.stat:
+        path: /etc/fstab.bak
+      register: fstab_bak
+
+    - name: Debug fstab backup file existence
+      ansible.builtin.debug:
+        msg: "fstab backup file exists"
+      when: fstab_bak.stat.exists
+
+    - name: Verify fstab before sed commad
+      ansible.builtin.slurp:
+        src: /etc/fstab
+      register: fstab_config
+
+    - name: Debug SELinux config
+      ansible.builtin.debug:
+        msg: "{{ fstab_config['content'] | b64decode }}"
+
+    - name: Remove swap from fstab
+      ansible.builtin.shell: sed -i '/swap/d' /etc/fstab
+
+    - name: Verify fstab after sed commad
+      ansible.builtin.slurp:
+        src: /etc/fstab
+      register: fstab_config_after
+
+    - name: Debug SELinux config
+      ansible.builtin.debug:
+        msg: "{{ fstab_config_after['content'] | b64decode }}"
+
+    - name: Update yum repos
+      ansible.builtin.shell: dnf repolist -y
+
+    - name: Create CRI-O repo file
+      ansible.builtin.blockinfile:
+        path: /etc/yum.repos.d/cri-o.repo
+        block: |
+          [cri-o]
+          name=cri-o
+          baseurl=https://pkgs.k8s.io/addons:/cri-o:/prerelease:/main/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/addons:/cri-o:/prerelease:/main/rpm/repodata/repomd.xml.key
+        create: true
+
+    - name: Install packages for kubernetes requirment
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - conntrack
+        - container-selinux
+        - ebtables
+        - ethtool
+        - iptables
+        - socat
+
+    - name: Install packages crio and kubernetes
+      ansible.builtin.shell: dnf install -y --repo cri-o --repo kubernetes cri-o kubeadm kubectl kubelet
+
+    - name: Enable CRIO and start
+      ansible.builtin.systemd_service:
+        name: crio
+        state: started
+        enabled: true
+
+    - name: Check CRI-O status
+      ansible.builtin.shell: systemctl status -l crio
+      register: crioresult
+
+    - name: Start kubernetes cluster
+      ansible.builtin.shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket=/var/run/crio/crio.sock --ignore-preflight-errors all
+
+    - name: Create a directory for ~/.kube if it does not exist
+      ansible.builtin.file:
+        path: $HOME/.kube
+        state: directory
+        mode: '0755'
+
+    - name: Copy kubernetes admin conf file to home directory
+      ansible.builtin.copy:
+        src: /etc/kubernetes/admin.conf
+        dest: $HOME/.kube/config
+
+    - name: Change file ownership, group to root
+      ansible.builtin.file:
+        path: $HOME/.kube/config
+        owner: root
+        group: root
+
+    - name: Ensure to export kubeconfig
+      ansible.builtin.shell: |
+        echo "[SUB TASK 1.1] update bash configuration"
+        echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bashrc
+        echo "[SUB TASK 1.2] update bash profile"
+        source ~/.bash_profile
